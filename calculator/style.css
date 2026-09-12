@@ -1,0 +1,771 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 15px;
+
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            #263c70,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            #542467,
+            transparent 35%
+        ),
+        #080b12;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CALCULATOR
+========================= */
+
+.calculator {
+    width: 360px;
+    max-width: 100%;
+
+    padding: 22px;
+
+    position: relative;
+
+    background: rgba(18, 22, 35, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.55),
+        inset 0 1px rgba(255, 255, 255, 0.08);
+
+    animation: calculatorOpen 0.6s ease;
+
+    overflow: hidden;
+}
+
+
+@keyframes calculatorOpen {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    color: #9ca7bd;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+}
+
+
+.header button {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.1s;
+}
+
+
+.header button:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+
+.header button:active {
+    transform: scale(0.9);
+}
+
+
+/* =========================
+   DISPLAY
+========================= */
+
+.display {
+    height: 130px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    padding: 10px 5px;
+
+    overflow: hidden;
+}
+
+
+#previous {
+    width: 100%;
+
+    min-height: 25px;
+
+    color: #737e96;
+
+    font-size: 17px;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+#current {
+    width: 100%;
+
+    color: white;
+
+    font-size: 44px;
+    font-weight: 600;
+
+    line-height: 1.15;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+}
+
+
+#current::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* =========================
+   BUTTON GRID
+========================= */
+
+.buttons {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 11px;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons button {
+    height: 66px;
+
+    border: 0;
+
+    border-radius: 19px;
+
+    background: rgba(255, 255, 255, 0.075);
+
+    color: white;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    position: relative;
+
+    overflow: hidden;
+
+    user-select: none;
+
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        transform 0.08s,
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+
+.buttons button:hover {
+    background: rgba(255, 255, 255, 0.14);
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+.buttons button:active {
+    transform: scale(0.91);
+}
+
+
+/* =========================
+   OPERATORS
+========================= */
+
+.operator {
+    background: rgba(76, 126, 255, 0.22) !important;
+
+    color: #a9c2ff !important;
+}
+
+
+.operator:hover {
+    background: rgba(76, 126, 255, 0.32) !important;
+}
+
+
+/* =========================
+   EQUAL
+========================= */
+
+.equal {
+    background:
+        linear-gradient(
+            135deg,
+            #527cff,
+            #9255ff
+        ) !important;
+
+    color: white !important;
+
+    box-shadow:
+        0 8px 25px rgba(82, 124, 255, 0.3);
+}
+
+
+.equal:hover {
+    box-shadow:
+        0 10px 30px rgba(82, 124, 255, 0.45);
+}
+
+
+/* =========================
+   CLEAR
+========================= */
+
+.clear {
+    background: rgba(255, 70, 90, 0.13) !important;
+
+    color: #ff8e9e !important;
+}
+
+
+.clear:hover {
+    background: rgba(255, 70, 90, 0.22) !important;
+}
+
+
+/* =========================
+   RIPPLE
+========================= */
+
+.ripple {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    transform: scale(0);
+
+    pointer-events: none;
+
+    animation: ripple 0.45s ease-out;
+}
+
+
+@keyframes ripple {
+
+    to {
+        transform: scale(4);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+.history {
+    position: absolute;
+
+    inset: 0;
+
+    padding: 22px;
+
+    background: rgba(9, 12, 20, 0.98);
+
+    border-radius: 30px;
+
+    transform: translateY(110%);
+
+    transition:
+        transform 0.35s ease;
+
+    z-index: 10;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: #3d4960 transparent;
+}
+
+
+.history.active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   HISTORY HEADER
+========================= */
+
+.history-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    color: white;
+
+    margin-bottom: 20px;
+}
+
+
+.history-top h2 {
+    font-size: 22px;
+}
+
+
+.history-top button {
+    width: 40px;
+    height: 40px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.1s;
+}
+
+
+.history-top button:hover {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+
+.history-top button:active {
+    transform: scale(0.9);
+}
+
+
+/* =========================
+   HISTORY ITEM
+========================= */
+
+.history-item {
+    padding: 13px;
+
+    margin-bottom: 10px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: white;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.09);
+
+    transform: translateX(2px);
+}
+
+
+.history-item small {
+    display: block;
+
+    color: #7e899f;
+
+    margin-bottom: 5px;
+
+    font-size: 13px;
+}
+
+
+#historyList p {
+    text-align: center;
+
+    color: #737d91;
+
+    margin-top: 50px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 420px) {
+
+    body {
+        padding: 10px;
+    }
+
+
+    .calculator {
+        width: 100%;
+
+        padding: 17px;
+
+        border-radius: 25px;
+    }
+
+
+    .display {
+        height: 115px;
+    }
+
+
+    .buttons {
+        gap: 8px;
+    }
+
+
+    .buttons button {
+        height: 60px;
+
+        border-radius: 17px;
+
+        font-size: 20px;
+    }
+
+
+    #current {
+        font-size: 36px;
+    }
+
+
+    #previous {
+        font-size: 15px;
+    }
+
+
+    .history {
+        border-radius: 25px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL SCREENS
+========================= */
+
+@media (max-width: 340px) {
+
+    .calculator {
+        padding: 13px;
+    }
+
+
+    .buttons {
+        gap: 6px;
+    }
+
+
+    .buttons button {
+        height: 55px;
+
+        border-radius: 15px;
+
+        font-size: 18px;
+    }
+
+
+    .display {
+        height: 105px;
+    }
+
+
+    #current {
+        font-size: 32px;
+    }
+
+}
+/* =========================
+   MOBILE PHONES
+========================= */
+
+@media screen and (max-width: 480px) {
+
+    body {
+        min-height: 100dvh;
+        padding: 8px;
+
+        align-items: center;
+    }
+
+    .calculator {
+        width: 100%;
+        max-width: 390px;
+
+        padding: 16px;
+
+        border-radius: 24px;
+    }
+
+    .header {
+        margin-bottom: 5px;
+    }
+
+    .header button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .display {
+        height: 120px;
+
+        padding: 8px 4px;
+    }
+
+    #previous {
+        font-size: 15px;
+    }
+
+    #current {
+        font-size: 38px;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .buttons button {
+        height: 60px;
+
+        border-radius: 16px;
+
+        font-size: 20px;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+   375px
+========================= */
+
+@media screen and (max-width: 375px) {
+
+    body {
+        padding: 6px;
+    }
+
+    .calculator {
+        padding: 13px;
+
+        border-radius: 22px;
+    }
+
+    .display {
+        height: 105px;
+    }
+
+    #current {
+        font-size: 34px;
+    }
+
+    #previous {
+        font-size: 14px;
+    }
+
+    .buttons {
+        gap: 7px;
+    }
+
+    .buttons button {
+        height: 56px;
+
+        border-radius: 15px;
+
+        font-size: 19px;
+    }
+
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+   320px
+========================= */
+
+@media screen and (max-width: 340px) {
+
+    body {
+        padding: 4px;
+    }
+
+    .calculator {
+        padding: 11px;
+
+        border-radius: 20px;
+    }
+
+    .header {
+        font-size: 11px;
+    }
+
+    .header button {
+        width: 35px;
+        height: 35px;
+    }
+
+    .display {
+        height: 95px;
+    }
+
+    #current {
+        font-size: 30px;
+    }
+
+    #previous {
+        font-size: 13px;
+    }
+
+    .buttons {
+        gap: 6px;
+    }
+
+    .buttons button {
+        height: 52px;
+
+        border-radius: 14px;
+
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================
+   SHORT SCREEN PHONES
+========================= */
+
+@media screen and (max-height: 700px) {
+
+    .calculator {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .display {
+        height: 90px;
+    }
+
+    .buttons button {
+        height: 52px;
+    }
+
+}
+
+
+/* =========================
+   TOUCH DEVICES
+========================= */
+
+@media (hover: none) and (pointer: coarse) {
+
+    .buttons button:hover {
+        background: rgba(255, 255, 255, 0.075);
+
+        box-shadow: none;
+    }
+
+    .buttons button:active {
+        transform: scale(0.92);
+    }
+
+}
